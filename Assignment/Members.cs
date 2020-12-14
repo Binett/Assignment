@@ -6,9 +6,9 @@ namespace Assignment
 {
     class Members
     {
+        public List<Members> listOfNorr = new List<Members>();
         //Skapa relevanta fält
-        private string firstName;
-        private string lastName;
+        private string name;        
         private int height;
         private int age;
         private string city;
@@ -18,9 +18,9 @@ namespace Assignment
         private string music;
         private int children;
         private string drive;
+
         //Ge dom propertys
-        public string FirstName { get => firstName; set => firstName = value; }
-        public string LastName { get => lastName; set => lastName = value; }
+        public string Name { get => name; set => name = value; }        
         public int Height { get => height; set => height = value; }
         public int Age { get => age; set => age = value; }
         public string City { get => city; set => city = value; }
@@ -32,10 +32,9 @@ namespace Assignment
         public string Drive { get => drive; set => drive = value; }
 
         // Skapa en konstruktor
-        public Members(string firstName,string lastName,int height,int age,string city,string hobby,string favouriteFood,string favouriteBeverage,string music,int chlidren,string drive)
+        public Members(string firstName,int height,int age,string city,string hobby,string favouriteFood,string favouriteBeverage,string music,int chlidren,string drive)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            this.Name = firstName;            
             this.Height = height;
             this.Age = age;
             this.City = city;
@@ -44,6 +43,22 @@ namespace Assignment
             this.FavoriteBeverage = favouriteBeverage;
             this.Music = music;
             this.Children = chlidren;
+            this.Drive = drive;
         }
+
+        public override string ToString()
+        {
+            return $"Namn:\t\t {Name}\n" +
+                $"Ålder:\t\t {Age}\n" +
+                $"Längd:\t\t {Height} cm\n" +
+                $"Bor:\t\t {City}\n" +
+                $"Hobby:\t\t {Hobby}\n" +
+                $"Favorit mat:\t {FavoriteFood}\n" +
+                $"Favorit dryck:\t {FavoriteBeverage}\n" +
+                $"Musik:\t\t {Music}\n" +
+                $"Antal barn:\t {Children}\n" +
+                $"Största driv:\t {Drive} \n";
+        }
+        
     }
 }
