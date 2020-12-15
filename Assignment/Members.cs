@@ -6,8 +6,11 @@ namespace Assignment
 {
     class Members
     {
-        public List<Members> listOfNorr = new List<Members>();
-        //Skapa relevanta fält
+
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+        //|------------------------------------------------> Skapa relevanta fält för klassen <---------------------------------------------------|
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+
         private string name;        
         private int height;
         private int age;
@@ -19,7 +22,11 @@ namespace Assignment
         private int children;
         private string drive;
 
-        //Ge dom propertys
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+        //|-----------------------------------------------------------------> Propertys <---------------------------------------------------------|
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+
+
         public string Name { get => name; set => name = value; }        
         public int Height { get => height; set => height = value; }
         public int Age { get => age; set => age = value; }
@@ -31,7 +38,10 @@ namespace Assignment
         public int Children { get => children; set => children = value; }
         public string Drive { get => drive; set => drive = value; }
 
-        // Skapa en konstruktor
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+        //|-----------------------------------------------------------> Konstruktor <-------------------------------------------------------------|
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+
         public Members(string firstName,int height,int age,string city,string hobby,string favouriteFood,string favouriteBeverage,string music,int chlidren,string drive)
         {
             this.Name = firstName;            
