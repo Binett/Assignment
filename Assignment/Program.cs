@@ -9,6 +9,7 @@ namespace Assignment
 
         static void Main(string[] args)
         {
+            Console.Title = "Login";
             ProgramRun user = new ProgramRun();
             user.Run();
         }

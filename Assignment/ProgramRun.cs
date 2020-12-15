@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace Assignment
@@ -19,7 +18,7 @@ namespace Assignment
 
 
         private List<Members> listOfNorr = new List<Members>();
-       
+
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|----------------------------------> Meny med switch case som kallar på de olika metoderna nedan <--------------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
@@ -27,12 +26,13 @@ namespace Assignment
 
         private void Menu()
         {
-            
+
             Login();
             do
             {
-
-                Console.WriteLine("Välkommen till Basgrupp Norrlänningarna!");
+                Console.Title = "Norrlänningarna";
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Välkommen till Basgrupp Norrlänningarna!\n");
                 Console.WriteLine("1.\t Visa elever");
                 Console.WriteLine("2.\t Visa info om elever");
                 Console.WriteLine("3.\t Ta bort elev");
@@ -62,7 +62,7 @@ namespace Assignment
                         Console.Clear();
                         break;
                 }
-
+                Console.ResetColor();
             } while (true);
         }
 
@@ -83,6 +83,7 @@ namespace Assignment
                 if (passWord == "Norrlänningarna")
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
                     Console.WriteLine("Korrekt Lösen! Välkommen till Norrlänningarna");
                     Console.ResetColor();
                     Thread.Sleep(2000);
@@ -91,6 +92,7 @@ namespace Assignment
                 }
                 else
                 {
+                    Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine($"Felaktigt lösenord! Försök nummer {tries} du har {counter} försök kvar");
                     Console.ResetColor();
@@ -101,6 +103,7 @@ namespace Assignment
                 counter--;
                 if (tries > 3)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Du har matat in fel lösenord 3 gånger, vänta en stund och försök igen");
                     Thread.Sleep(4000);
                     Environment.Exit(0);
@@ -120,14 +123,14 @@ namespace Assignment
             Console.Clear();
             foreach (Members students in listOfNorr)
             {
-                Console.WriteLine($"{students.Name},");
+                Console.Write($"{students.Name},");
             }
             Console.WriteLine();
             Console.WriteLine("Tryck på valfri tangent för att återgå till menyn");
             Console.ReadKey();
             Console.Clear();
         }
-
+        
 
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|--------------------------------------------> Ytterliggare information om studenterna <------------------------------------------------|
@@ -138,8 +141,9 @@ namespace Assignment
         {
             try
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Clear();
-                Console.WriteLine("Information om elever i Norrlänningarna! Tryck på siffran som motsvarar eleven för mer information");
+                Console.WriteLine("Information om elever i Norrlänningarna! Tryck på siffran som motsvarar eleven för mer information\n");
 
                 int index = 1;
                 foreach (Members students in listOfNorr)
@@ -154,7 +158,9 @@ namespace Assignment
                 {
                     if (input - 1 == i)
                     {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine(listOfNorr[i]);
+                        Console.ResetColor();
                     }
                 }
                 Console.WriteLine("Vill du ha info om någon annan? Ange \"ja\", \nAnnars tryck valfri tangent för att återgå till menyn\n");
@@ -208,24 +214,23 @@ namespace Assignment
         {
             Console.WriteLine("Vill du lägga någon medlem? Ange \"ja\", \nAnnars tryck valfri tangent för att återgå till menyn\n");
             string input = Console.ReadLine();
-            if (input == "ja")
+            if (input.ToLower() == "ja")
             {
                 try
                 {
-
                     Console.Write("Namn: ");
                     string name = Console.ReadLine();
                     Console.Write("Heigth: ");
                     int height = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("age: ");
+                    Console.Write("Age: ");
                     int age = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("city: ");
+                    Console.Write("City: ");
                     string city = Console.ReadLine();
-                    Console.Write("hobby: ");
+                    Console.Write("Hobby: ");
                     string hobby = Console.ReadLine();
-                    Console.Write("favourite food: ");
+                    Console.Write("Favourite food: ");
                     string food = Console.ReadLine();
-                    Console.Write("favourite drink: ");
+                    Console.Write("Favourite drink: ");
                     string drink = Console.ReadLine();
                     Console.Write("Music: ");
                     string music = Console.ReadLine();
@@ -233,14 +238,19 @@ namespace Assignment
                     int children = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Största driv: ");
                     string driv = Console.ReadLine();
-
-
-
-                    listOfNorr.Add(new Members(name, height, age, city, hobby, food, drink, music, children, driv));
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"{name} Tillagd i listan");
-                    Console.ResetColor();
+                    Console.WriteLine($"Du angav\n{name}\n{height}\n{age}\n{city}\n{hobby}\n{food}\n{drink}\n{music}\n{children}\n{driv}\n");
+                    Console.WriteLine("Om du vill lägga till i listan ange \"ja\" Annars tryck Enter för att ångra");
+                    string askToAdd = Console.ReadLine();
+
+                    if (askToAdd.ToLower() == "ja")
+                    {
+                        listOfNorr.Add(new Members(name, height, age, city, hobby, food, drink, music, children, driv));
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"{name} Tillagd i listan");
+                        Console.ResetColor();
+                    }
                 }
                 catch (Exception e)
                 {
@@ -250,17 +260,17 @@ namespace Assignment
                     Thread.Sleep(2000);
                     Console.Clear();
                     AddStudent();
-
                 }
 
             }
+            Console.Clear();
         }
 
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|-------------------------> Har skapar jag objekten av klassen memember och lägger till dessa i listan <--------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
 
-        private void MembersOfNorr()
+         private void MembersOfNorr()
         {
             Members tobias = new Members("Tobias Binett", 192, 31, "Hudiksvall", "Familjen", "Kött", "Öl", "The Black Dahlia Murders", 2, "Att kunna skapa något användbart för mig själv och and och att kunna arbeta med det.");
             Members fredrik = new Members("Fredrik Hoffman", 192, 28, "Östersund", "musik,socialisera,film,serier,automation och skriptning,programmering,testa nytt,äta ute,whiskykväll och öl", "Entrecote med rotfrukter och vitlökssmör", "Trocadero Zero, Ardbeg och Budvar", "Armin Van Buuren (annars progressive trance, house, trance, electronic, progressive house, rock, metal, heavy metal)", 0, "Möjlighet till karriärutveckling.");
