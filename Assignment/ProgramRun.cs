@@ -6,18 +6,19 @@ namespace Assignment
 {
     class ProgramRun
     {
-        public void Run()
-        {
-            MembersOfNorr();
-            Menu();
-        }
-
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|-----------------------------------------------> Listan med samtliga medlemmar <-------------------------------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
 
 
         private List<Members> listOfNorr = new List<Members>();
+
+        public void Run()
+        {
+            MembersOfNorr();
+            Menu();
+        }
+
 
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|----------------------------------> Meny med switch case som kallar på de olika metoderna nedan <--------------------------------------|
@@ -123,14 +124,14 @@ namespace Assignment
             Console.Clear();
             foreach (Members students in listOfNorr)
             {
-                Console.Write($"{students.Name},");
+                Console.Write($" {students.Name},");
             }
             Console.WriteLine();
             Console.WriteLine("Tryck på valfri tangent för att återgå till menyn");
             Console.ReadKey();
             Console.Clear();
         }
-        
+
 
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|--------------------------------------------> Ytterliggare information om studenterna <------------------------------------------------|
@@ -148,12 +149,13 @@ namespace Assignment
                 int index = 1;
                 foreach (Members students in listOfNorr)
                 {
-                    Console.WriteLine("{0}", index + "\t" + $"{students.Name}");
+                    Console.WriteLine($"{index}\t{students.Name}");
                     index++;
                 }
                 Console.WriteLine();
                 Console.WriteLine("Vill du ha mer info om någon student tryck siffran som representerar dem.");
                 int input = Convert.ToInt32(Console.ReadLine());
+
                 for (int i = 0; i < listOfNorr.Count; i++)
                 {
                     if (input - 1 == i)
@@ -163,6 +165,7 @@ namespace Assignment
                         Console.ResetColor();
                     }
                 }
+
                 Console.WriteLine("Vill du ha info om någon annan? Ange \"ja\", \nAnnars tryck valfri tangent för att återgå till menyn\n");
                 string askAgain = Console.ReadLine();
                 if (askAgain == "ja")
@@ -172,7 +175,7 @@ namespace Assignment
                 Console.Clear();
             }
             catch (Exception e)
-            {
+            {                
                 Console.WriteLine("Felaktig inmatning! Du återgår nu till menyn \n" + e.Message);
                 Thread.Sleep(2000);
                 Console.Clear();
@@ -187,21 +190,35 @@ namespace Assignment
         {
             //Lista eleverna med hjälp av en loop ge sedan alternativet att ta bort från index i listan
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             int index = 1;
             Console.WriteLine("Här nedan listas eleverna i Norrlänningarna!");
             foreach (Members students in listOfNorr)
             {
-                Console.WriteLine("{0}", index + "\t" + $"{students.Name}");
+                Console.WriteLine($"{index}\t{students.Name}");
                 index++;
             }
             Console.Write("Vill du ta bort någon medlem? Ange \"ja\", \nAnnars tryck valfri tangent för att återgå till menyn\n");
             string input = Console.ReadLine();
 
-            if (input == "ja")
+            try
             {
-                Console.WriteLine("Ange siffran som representerar eleven för att ta bort från klasslistan");
-                int choice = Convert.ToInt32(Console.ReadLine());
-                listOfNorr.RemoveAt(choice - 1);
+                if (input == "ja")
+                {
+                    Console.WriteLine("Ange siffran som representerar eleven för att ta bort från klasslistan");
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    listOfNorr.RemoveAt(choice - 1);
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Personen borttagen!");
+                    Thread.Sleep(3000);
+                    Console.ResetColor();
+                    RemoveStudent();
+                }
+            }
+            catch (Exception e)
+            {                
+                Console.WriteLine("Felaktig inmatning " +e.Message);
+                Thread.Sleep(3000);
             }
             Console.Clear();
         }
@@ -257,6 +274,7 @@ namespace Assignment
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Felaktig inmatning" + e.Message);
                     Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Thread.Sleep(2000);
                     Console.Clear();
                     AddStudent();
@@ -270,30 +288,20 @@ namespace Assignment
         //|-------------------------> Har skapar jag objekten av klassen memember och lägger till dessa i listan <--------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
 
-         private void MembersOfNorr()
+        private void MembersOfNorr()
         {
-            Members tobias = new Members("Tobias Binett", 192, 31, "Hudiksvall", "Familjen", "Kött", "Öl", "The Black Dahlia Murders", 2, "Att kunna skapa något användbart för mig själv och and och att kunna arbeta med det.");
-            Members fredrik = new Members("Fredrik Hoffman", 192, 28, "Östersund", "musik,socialisera,film,serier,automation och skriptning,programmering,testa nytt,äta ute,whiskykväll och öl", "Entrecote med rotfrukter och vitlökssmör", "Trocadero Zero, Ardbeg och Budvar", "Armin Van Buuren (annars progressive trance, house, trance, electronic, progressive house, rock, metal, heavy metal)", 0, "Möjlighet till karriärutveckling.");
-            Members dennis = new Members("Dennis Lindquist", 182, 32, "Älvdalen", "Gitarr/musik", "Friterad kyckling", "öl", "Metallica", 1, "Att få skapa och kunna vara kreativ. Men även att få göra ett byte av karriär.");
-            Members benny = new Members("Benny Christensen", 194, 38, "Brunflo", "Datorspel, Fiske, Programmering, Landsvägscykling", "Älgkebab", "Coca Cola", "Foo Fighters", 2, "Att kunna skapa något från grunden och lösa problem med det jag skapat. Att sedan kunna använda detta till att tjäna hutlösa summor pengar är ju i sig ytterligare en morot.");
-            Members håkan = new Members("Håkan Eriksson", 187, 44, "Uppsala", " Moto-X, Sporthojar, Online gaming", "Shish kebab", "Loka Citron", "Disturbed", 0, "Social engineering, datasäkerhet, pentesting.");
-            Members tina = new Members("Tina Eriksson", 165, 30, "Brunflo/Östersund", "Spela TV-spel", "Potatis & Purjolökssoppa", "Kaffe", "Avicii", 2, "Få ett bra jobb, som jag tycker om");
-            Members emil = new Members("Emil Örjes", 184, 26, "Falun", "Snowboard, Gitarr, Musik, Hunden, Tv-spel", "Feta Hamburgare", "Öl", "System Of a Down", 0, "Att lära sig ett nytt yrke helt från grunden som känns givande.");
-            Members mattias = new Members("Mattias Vikström", 187, 33, "Umeå", "Fiske,matlagning", "Cowboysoppa", "Gin och Tonic", "Infected Mushroom", 0, "Personlig utveckling och kreativitet");
-            Members nicklas = new Members("Nicklas Eriksson", 175, 26, "Umeå", "Skidor, cykel, simma, springa, fjällvandring, klättring och dataspel", "Gröt med jornötssmör", "Whiskey", "Falling in Reverse och Self Deception", 0, "Drivet kommer från att man får vara kreativ och en problemlösare på samma gång. Sen så drivs man såklart av att få testa på en annan karriär än den man har haft tidigare");
-            Members josefine = new Members("Josefine Rönnqvist", 164, 34, "Gideå", "Sy,pussla,umgås", "Frukt", "Vatten", "Halsbandet", 2, "Personlig utveckling och karriärbyte");
-            listOfNorr.Add(tobias);
-            listOfNorr.Add(fredrik);
-            listOfNorr.Add(dennis);
-            listOfNorr.Add(benny);
-            listOfNorr.Add(håkan);
-            listOfNorr.Add(tina);
-            listOfNorr.Add(emil);
-            listOfNorr.Add(mattias);
-            listOfNorr.Add(nicklas);
-            listOfNorr.Add(josefine);
-
+            listOfNorr.Add(new Members("Tobias Binett", 192, 31, "Hudiksvall", "Träning, Musik, Spel, Familjen", "Kött", "Öl", "The Black Dahlia Murders", 2, "Att kunna skapa något användbart för mig själv och and och att kunna arbeta med det."));
+            listOfNorr.Add(new Members("Fredrik Hoffman", 192, 28, "Östersund", "musik,socialisera,film,serier,automation och skriptning,programmering,testa nytt,äta ute,whiskykväll och öl", "Entrecote med rotfrukter och vitlökssmör", "Trocadero Zero, Ardbeg och Budvar", "Armin Van Buuren (annars progressive trance, house, trance, electronic, progressive house, rock, metal, heavy metal)", 0, "Möjlighet till karriärutveckling."));
+            listOfNorr.Add(new Members("Dennis Lindquist", 182, 32, "Älvdalen", "Gitarr/musik", "Friterad kyckling", "öl", "Metallica", 1, "Att få skapa och kunna vara kreativ. Men även att få göra ett byte av karriär."));
+            listOfNorr.Add(new Members("Benny Christensen", 194, 38, "Brunflo", "Datorspel, Fiske, Programmering, Landsvägscykling", "Älgkebab", "Coca Cola", "Foo Fighters", 2, "Att kunna skapa något från grunden och lösa problem med det jag skapat. Att sedan kunna använda detta till att tjäna hutlösa summor pengar är ju i sig ytterligare en morot."));
+            listOfNorr.Add(new Members("Håkan Eriksson", 187, 44, "Uppsala", " Moto-X, Sporthojar, Online gaming", "Shish kebab", "Loka Citron", "Disturbed", 0, "Social engineering, datasäkerhet, pentesting."));
+            listOfNorr.Add(new Members("Tina Eriksson", 165, 30, "Brunflo/Östersund", "Spela TV-spel", "Potatis & Purjolökssoppa", "Kaffe", "Avicii", 2, "Få ett bra jobb, som jag tycker om"));
+            listOfNorr.Add(new Members("Emil Örjes", 184, 26, "Falun", "Snowboard, Gitarr, Musik, Hunden, Tv-spel", "Feta Hamburgare", "Öl", "System Of a Down", 0, "Att lära sig ett nytt yrke helt från grunden som känns givande."));
+            listOfNorr.Add(new Members("Mattias Vikström", 187, 33, "Umeå", "Fiske,matlagning", "Cowboysoppa", "Gin och Tonic", "Infected Mushroom", 0, "Personlig utveckling och kreativitet"));
+            listOfNorr.Add(new Members("Nicklas Eriksson", 175, 26, "Umeå", "Skidor, cykel, simma, springa, fjällvandring, klättring och dataspel", "Gröt med jornötssmör", "Whiskey", "Falling in Reverse och Self Deception", 0, "Drivet kommer från att man får vara kreativ och en problemlösare på samma gång. Sen så drivs man såklart av att få testa på en annan karriär än den man har haft tidigare"));
+            listOfNorr.Add(new Members("Josefine Rönnqvist", 164, 34, "Gideå", "Sy,pussla,umgås", "Frukt", "Vatten", "Halsbandet", 2, "Personlig utveckling och karriärbyte"));
         }
+
 
     }
 }

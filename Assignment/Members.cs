@@ -11,7 +11,7 @@ namespace Assignment
         //|------------------------------------------------> Skapa relevanta fält för klassen <---------------------------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
 
-        protected string name;        
+        private string name;        
         private int height;
         private int age;
         private string city;
@@ -63,7 +63,7 @@ namespace Assignment
         public override string ToString()
         {
             return $"Namn:\t\t {Name}\n" +
-                $"Ålder:\t\t {Age}\n" +
+                $"Ålder:\t\t {Age} år gammal\n" +
                 $"Längd:\t\t {Height} cm\n" +
                 $"Bor:\t\t {City}\n" +
                 $"Hobby:\t\t {Hobby}\n" +
