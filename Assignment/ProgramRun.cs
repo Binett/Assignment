@@ -13,23 +13,26 @@ namespace Assignment
 
         private List<Members> listOfNorr = new List<Members>();
 
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+        //|----------> Run är public så vi når den i program.cs här läses mockdatan in och skickar oss vidare in till menyn. <--------------------|
+        //|------------------------------------------> Där hittar vi även metoden som sköter Login <----------------------------------------------|
+        //|---------------------------------------------------------------------------------------------------------------------------------------|
+
         public void Run()
         {
             MembersOfNorr();
             Menu();
         }
 
-
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|----------------------------------> Meny med switch case som kallar på de olika metoderna nedan <--------------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
 
-
         private void Menu()
         {
-
+            
             Login();
-            do
+            while (true)
             {
                 Console.Title = "Norrlänningarna";
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -39,10 +42,10 @@ namespace Assignment
                 Console.WriteLine("3.\t Ta bort elev");
                 Console.WriteLine("4.\t Lägg till en elev");
                 Console.WriteLine("5.\t Avsluta");
-                char choice = Console.ReadKey().KeyChar;
+                char menuChoice = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
-                switch (choice)
+                switch (menuChoice)
                 {
                     case '1':
                         ShowStudentsName();
@@ -64,7 +67,7 @@ namespace Assignment
                         break;
                 }
                 Console.ResetColor();
-            } while (true);
+            } 
         }
 
         //|---------------------------------------------------------------------------------------------------------------------------------------|
@@ -73,6 +76,7 @@ namespace Assignment
 
         private void Login()
         {
+            Console.Title = "Login";
             bool checkPass = true;
             int tries = 1;
             int counter = 2;
@@ -117,7 +121,6 @@ namespace Assignment
         //|--------------------------------> Används för att visa studenternas namn på vilka som går kursen <-------------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
 
-
         private void ShowStudentsName()
         {
             //Lista samtliga namn
@@ -132,11 +135,9 @@ namespace Assignment
             Console.Clear();
         }
 
-
         //|---------------------------------------------------------------------------------------------------------------------------------------|
         //|--------------------------------------------> Ytterliggare information om studenterna <------------------------------------------------|
         //|---------------------------------------------------------------------------------------------------------------------------------------|
-
 
         private void ShowStudentsInfo()
         {
